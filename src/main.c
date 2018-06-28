@@ -33,6 +33,7 @@ along with ngp.  If not, see <http://www.gnu.org/licenses/>.
 #include <dirent.h>
 #include <signal.h>
 #include <getopt.h>
+#include <locale.h>
 #include <unistd.h>
 
 #define _GNU_SOURCE
@@ -160,6 +161,8 @@ int main(int argc, char *argv[])
     display = create_display();
     global_display = display;
     global_config = config;
+
+    setlocale(LC_ALL, "");
 
     signal(SIGINT, sig_handler);
     if (pthread_create(&pid, NULL, lookup_thread, search)) {
